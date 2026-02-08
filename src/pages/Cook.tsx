@@ -49,7 +49,7 @@ export default function Cook() {
 
           {/* Talk button floats bottom center */}
           <div className="talkButtonWrap">
-            <TalkButton autoStopMs={8000} />
+            <TalkButton />
           </div>
 
         </section>

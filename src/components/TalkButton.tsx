@@ -1,42 +1,68 @@
 import { useEffect, useState } from "react";
+import { useConversation } from "@elevenlabs/react";
 import "./TalkButton.css";
 
-type Props = {
-  onToggleListening?: (isListening: boolean) => void;
-  autoStopMs?: number; // optional: automatically stop "listening" after X ms
-};
+export default function TalkButton() {
+  const [isAgentActive, setIsAgentActive] = useState(false);
+  const agentId = import.meta.env.VITE_AGENT_ID;
 
-export default function TalkButton({
-  onToggleListening,
-  autoStopMs = 0,
-}: Props) {
-  const [isListening, setIsListening] = useState(false);
+  const conversation = useConversation({
+    onConnect: () => console.log("Connected to agent"),
+    onDisconnect: () => {
+      console.log("Disconnected from agent");
+      setIsAgentActive(false);
+    },
+    onError: (error: string) => console.error("Agent error:", error),
+    onMessage: (message: unknown) => console.log("Message:", message),
+  });
 
-  // optional auto-stop (pure UI)
   useEffect(() => {
-    if (!isListening) return;
-    if (!autoStopMs || autoStopMs <= 0) return;
+    if (isAgentActive && agentId) {
+      conversation.startSession({
+        agentId,
+        connectionType: "webrtc",
+      });
+    } else if (!isAgentActive && conversation.status === "connected") {
+      conversation.endSession();
+    }
+  }, [isAgentActive, agentId]);
 
-    const t = window.setTimeout(() => setIsListening(false), autoStopMs);
-    return () => window.clearTimeout(t);
-  }, [isListening, autoStopMs]);
+  const isConnected = conversation.status === "connected";
+  const isConnecting = conversation.status === "connecting";
+  const isSpeaking = conversation.isSpeaking;
 
-  // notify parent if needed later
-  useEffect(() => {
-    onToggleListening?.(isListening);
-  }, [isListening, onToggleListening]);
+  const label = isConnecting
+    ? "Connecting…"
+    : isConnected
+      ? isSpeaking
+        ? "Speaking…"
+        : "Listening…"
+      : "Talk";
+
+  const icon = isConnecting
+    ? "⏳"
+    : isConnected
+      ? isSpeaking
+        ? "🗣️"
+        : "🎙️"
+      : "🎤";
+
+  if (!agentId) {
+    return null;
+  }
 
   return (
     <div className="talkWrap">
       <button
         type="button"
-        className={`talkBtn ${isListening ? "listening" : ""}`}
-        onClick={() => setIsListening((v) => !v)}
-        aria-pressed={isListening}
-        aria-label={isListening ? "Stop listening" : "Start listening"}
+        className={`talkBtn ${isConnected ? "listening" : ""} ${isConnecting ? "connecting" : ""}`}
+        onClick={() => setIsAgentActive((v) => !v)}
+        disabled={isConnecting}
+        aria-pressed={isConnected}
+        aria-label={isConnected ? "End conversation" : "Start conversation"}
       >
-        <span className="talkIcon">{isListening ? "🎙️" : "🎤"}</span>
-        <span className="talkText">{isListening ? "Listening…" : "Talk"}</span>
+        <span className="talkIcon">{icon}</span>
+        <span className="talkText">{label}</span>
       </button>
     </div>
   );
