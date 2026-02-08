@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import Camera from "./components/Camera";
 import Instructions, { type Step } from "./components/Instructions";
-//import TalkButton from "./components/TalkButton";
 import "./App.css";
 
 export default function App() {
@@ -17,10 +16,10 @@ export default function App() {
   );
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showAll, setShowAll] = useState(false);
 
   const goPrev = () => setCurrentIndex((i) => Math.max(0, i - 1));
-  const goNext = () =>
-    setCurrentIndex((i) => Math.min(steps.length - 1, i + 1));
+  const goNext = () => setCurrentIndex((i) => Math.min(steps.length - 1, i + 1));
 
   return (
     <div className="app">
@@ -32,39 +31,45 @@ export default function App() {
       </header>
 
       <main className="main">
+        {/* Camera fills most of the screen */}
         <section className="cameraArea">
           <Camera />
+
+          {/* Lyrics overlay on top of camera */}
+          <div className="lyricsOverlay">
+            <Instructions
+              mode="now"
+              steps={steps}
+              currentIndex={currentIndex}
+              onSelectIndex={setCurrentIndex}
+              onPrev={goPrev}
+              onNext={goNext}
+              onOpenAll={() => setShowAll(true)}
+            />
+          </div>
         </section>
 
-        <section className="instructionsArea">
+        {/* Bottom sheet for full list */}
+        <div
+          className={`sheetBackdrop ${showAll ? "open" : ""}`}
+          onClick={() => setShowAll(false)}
+        />
+
+        <section className={`sheet ${showAll ? "open" : ""}`}>
           <Instructions
+            mode="list"
             steps={steps}
             currentIndex={currentIndex}
-            onSelectIndex={setCurrentIndex}
+            onSelectIndex={(i) => {
+              setCurrentIndex(i);
+              setShowAll(false);
+            }}
             onPrev={goPrev}
             onNext={goNext}
+            onCloseAll={() => setShowAll(false)}
           />
         </section>
       </main>
-
-      {/* <TalkButton
-        onTranscript={(text) => {
-          const t = text.toLowerCase();
-          if (t.includes("next")) goNext();
-          else if (t.includes("back") || t.includes("previous")) goPrev();
-          else {
-            const match = t.match(/step\s+(\d+)/);
-            if (match) {
-              const stepNum = Number(match[1]);
-              if (!Number.isNaN(stepNum)) {
-                setCurrentIndex(
-                  Math.min(steps.length - 1, Math.max(0, stepNum - 1))
-                );
-              }
-            }
-          }
-        }}
-      /> */}
     </div>
   );
 }
