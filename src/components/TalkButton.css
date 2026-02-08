@@ -1,0 +1,35 @@
+.talkWrap {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  
+  .talkBtn {
+    border: none;
+    background: var(--accent);
+    color: white;
+    padding: 14px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(124, 92, 255, 0.35);
+  }
+  
+  .talkBtn.live {
+    filter: brightness(1.1);
+  }
+  
+  .toast {
+    max-width: 260px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+  }
+  

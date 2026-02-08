@@ -1,0 +1,67 @@
+.cameraPanel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cameraFrame {
+    position: relative;
+    flex: 1;
+    background: #000;
+  }
+  
+  .cameraVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .cameraOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .cameraBadge {
+    align-self: flex-start;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+  }
+  
+  .cameraHint {
+    align-self: center;
+    margin-bottom: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  
+  .cameraControls {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .error {
+    color: #ff7b7b;
+    font-size: 12px;
+    max-width: 60%;
+    text-align: right;
+  }
+  
