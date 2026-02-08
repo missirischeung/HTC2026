@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useConversation } from "@elevenlabs/react";
 import "./TalkButton.css";
 
 export default function TalkButton() {
   const [isAgentActive, setIsAgentActive] = useState(false);
+  const [toolCalled, setToolCalled] = useState(false);
+  const toolTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const agentId = import.meta.env.VITE_AGENT_ID;
 
   const conversation = useConversation({
@@ -21,11 +23,26 @@ export default function TalkButton() {
       conversation.startSession({
         agentId,
         connectionType: "webrtc",
+        clientTools: {
+          asks_question: async (params: unknown) => {
+            console.log("asks_question tool called:", params);
+            setToolCalled(true);
+            if (toolTimerRef.current) clearTimeout(toolTimerRef.current);
+            toolTimerRef.current = setTimeout(() => setToolCalled(false), 3000);
+            return "Question acknowledged";
+          },
+        },
       });
     } else if (!isAgentActive && conversation.status === "connected") {
       conversation.endSession();
     }
   }, [isAgentActive, agentId]);
+
+  useEffect(() => {
+    return () => {
+      if (toolTimerRef.current) clearTimeout(toolTimerRef.current);
+    };
+  }, []);
 
   const isConnected = conversation.status === "connected";
   const isConnecting = conversation.status === "connecting";
@@ -53,6 +70,12 @@ export default function TalkButton() {
 
   return (
     <div className="talkWrap">
+      {toolCalled && (
+        <div className="toolIndicator">
+          <span className="toolIndicatorIcon">❓</span>
+          <span>Question detected</span>
+        </div>
+      )}
       <button
         type="button"
         className={`talkBtn ${isConnected ? "listening" : ""} ${isConnecting ? "connecting" : ""}`}
