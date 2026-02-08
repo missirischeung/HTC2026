@@ -1,102 +1,117 @@
-/* 
 :root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-  
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-  
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  } */
+  font-family: "Inter", "SF Pro Display", system-ui, -apple-system, sans-serif;
 
-:root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    /* Light backgrounds */
-    --bg-cream: #fff7ea;     /* pale cream */
-    --bg-sky: #dbe4ee;       /* airy Alice Blue */
-    --forest-green: #1f4d3a;
-    --surface: rgba(255, 255, 255, 0.94);
-    --surface-2: rgba(255, 246, 235, 0.92);
-  
-    /* Text */
-    --ink: #003249;          /* deep blue ink */
-    --muted: rgba(0, 50, 73, 0.65);
-  
-    /* Accents */
-    --border: rgba(0, 50, 73, 0.12);
-    --orange: #f17300;
-    --orange-soft: rgba(241, 115, 0, 0.22);
-    --orange-border: rgba(241, 115, 0, 0.60);
-  
-    /* Buttons */
-    --green: #2fbf71;        /* friendly green */
-    --green-hover: #27ab65;
-    --green-press: #209558;
-  
-    /* Shadows */
-    --shadow-soft: 0 10px 24px rgba(0, 50, 73, 0.10);
-    --shadow-warm: 0 14px 30px rgba(241, 115, 0, 0.16);
-  
-    /* Radius */
-    --r-lg: 22px;
-    --r-md: 16px;
-    --r-sm: 14px;
-  }
-  
-  html, body, #root {
-    height: 100%;
-  }
-  
-  body {
-    margin: 0;
-    background: linear-gradient(180deg, var(--bg-cream), var(--bg-sky));
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  button {
-    font: inherit;
-  }
-  
-  /* Shared button system */
-  .btn {
-    border: 1.5px solid rgba(0, 50, 73, 0.14);
-    background: rgba(255, 255, 255, 0.92);
-    color: var(--ink);
-    border-radius: var(--r-sm);
-    padding: 10px 14px;
-    font-weight: 900;
-    box-shadow: 0 8px 18px rgba(0, 50, 73, 0.06);
-    transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
-  }
-  
-  .btn:active {
-    transform: translateY(1px) scale(0.99);
-  }
-  
-  .btn.primary {
-    background: var(--green);
-    border-color: rgba(0, 0, 0, 0.08);
-    color: #fff;
-    box-shadow: 0 12px 26px rgba(47, 191, 113, 0.22);
-  }
-  
-  .btn.primary:hover {
-    background: var(--green-hover);
-  }
-  
-  .btn.primary:active {
-    background: var(--green-press);
-  }
-  
-  .btn.ghost {
-    background: transparent;
-    border-color: rgba(241, 115, 0, 0.45);
-  }
-  
+  /* Light backgrounds */
+  --bg-cream: #fdf6ec;
+  --bg-sky: #edf1f7;
+  --forest-green: #1b4332;
+  --surface: rgba(255, 255, 255, 0.96);
+  --surface-2: rgba(255, 248, 238, 0.94);
+
+  /* Text */
+  --ink: #1a2e3b;
+  --muted: rgba(26, 46, 59, 0.55);
+
+  /* Accents */
+  --border: rgba(26, 46, 59, 0.08);
+  --orange: #e8711a;
+  --orange-soft: rgba(232, 113, 26, 0.12);
+  --orange-border: rgba(232, 113, 26, 0.30);
+
+  /* Buttons */
+  --green: #2fbf71;
+  --green-hover: #27ab65;
+  --green-press: #209558;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 16px rgba(26, 46, 59, 0.08);
+  --shadow-card: 0 2px 8px rgba(26, 46, 59, 0.06), 0 8px 24px rgba(26, 46, 59, 0.06);
+  --shadow-warm: 0 8px 24px rgba(232, 113, 26, 0.10);
+
+  /* Radius */
+  --r-lg: 20px;
+  --r-md: 14px;
+  --r-sm: 12px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ===== Shared button system ===== */
+.btn {
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--r-sm);
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 100ms ease, box-shadow 100ms ease, background 100ms ease;
+}
+
+.btn:hover {
+  box-shadow: 0 6px 20px rgba(26, 46, 59, 0.10);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn.primary {
+  background: var(--green);
+  border-color: rgba(0, 0, 0, 0.06);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(47, 191, 113, 0.25);
+}
+
+.btn.primary:hover {
+  background: var(--green-hover);
+}
+
+.btn.primary:active {
+  background: var(--green-press);
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+.btn.ghost:hover {
+  background: rgba(26, 46, 59, 0.04);
+}
+
+/* Utility: hide scrollbar but keep scrollable */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Lock body scroll when modal open */
+body.modalOpen {
+  overflow: hidden;
+}

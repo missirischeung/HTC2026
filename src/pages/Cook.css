@@ -1,270 +1,268 @@
-/* ===== Cook Screen (Airy + Cream + Orange + Green Actions) ===== */
+/* ===== Cook Screen ===== */
 .cookApp {
-    min-height: 100dvh;
-    background: var(--bg-sky);
-    color: var(--ink);
-  
-    display: flex;
-    flex-direction: column;
-  
-    max-width: 520px;
-    margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--bg-sky);
+  color: var(--ink);
+
+  display: flex;
+  flex-direction: column;
+
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===== Top Bar ===== */
+.cookTopbar {
+  height: 52px;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 12px;
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.cookBack {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--bg-sky);
+  border: 1px solid var(--border);
+
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+
+  transition: background 100ms;
+}
+
+.cookBack:hover {
+  background: rgba(26, 46, 59, 0.06);
+}
+
+.cookTitle {
+  text-align: center;
+  font-weight: 750;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--forest-green);
+}
+
+/* ===== Main ===== */
+.cookMain {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+}
+
+/* ===== Camera Stage ===== */
+.cameraStage {
+  position: relative;
+  flex: 1;
+
+  border-radius: var(--r-lg);
+  overflow: hidden;
+
+  background: #000;
+  border: 1px solid rgba(26, 46, 59, 0.10);
+
+  box-shadow: var(--shadow-card);
+}
+
+/* soften camera slightly */
+.cameraVideo {
+  filter: contrast(0.98) saturate(0.98);
+}
+
+/* ===== Instruction Overlay ===== */
+.nowOverlay {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  width: calc(100% - 20px);
+  max-width: 460px;
+}
+
+/* ===== Talk Button Placement ===== */
+.talkButtonWrap {
+  position: absolute;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 12;
+}
+
+/* ===== Debug Toggle ===== */
+.debugToggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  background: var(--bg-sky);
+  border: 1px solid var(--border);
+
+  font-size: 9px;
+  font-weight: 800;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--muted);
+  letter-spacing: -0.3px;
+
+  transition: background 120ms, border-color 120ms, color 120ms;
+}
+
+.debugToggle:hover {
+  background: rgba(26, 46, 59, 0.06);
+}
+
+.debugToggle.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #0f0;
+}
+
+/* ===== Debug Panel ===== */
+.debugPanel {
+  position: absolute;
+  bottom: 100px;
+  left: 10px;
+  right: 10px;
+  max-height: 45%;
+  z-index: 20;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  background: rgba(10, 10, 10, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  padding: 8px;
+
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #ccc;
+
+  animation: debugSlideUp 0.2s ease-out;
+}
+
+@keyframes debugSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.debugHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 4px 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+}
+
+.debugClear {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #999;
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.debugClear:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.debugEmpty {
+  color: #555;
+  padding: 12px 4px;
+  text-align: center;
+  font-style: italic;
+}
+
+.debugEntry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 4px;
+  border-radius: 6px;
+  margin-bottom: 2px;
+}
+
+.debugEntry:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.debugTime {
+  color: #555;
+  flex-shrink: 0;
+}
+
+.debugType {
+  flex-shrink: 0;
+  font-weight: 700;
+  width: 20px;
+  text-align: center;
+}
+
+.debugEntry--tool-call .debugType   { color: #ffcc00; }
+.debugEntry--snapshot .debugType    { color: #00ccff; }
+.debugEntry--gemini-request .debugType  { color: #ff9900; }
+.debugEntry--gemini-response .debugType { color: #00ff88; }
+.debugEntry--error .debugType       { color: #ff4444; }
+
+.debugMsg {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.debugEntry--gemini-response .debugMsg { color: #00ff88; }
+.debugEntry--error .debugMsg { color: #ff6666; }
+
+.debugThumb {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 4px;
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 700px) {
+  .cookApp {
+    padding-top: 8px;
   }
-  
-  /* ===== Top Bar ===== */
-  .cookTopbar {
-    height: 52px;
-    display: grid;
-    grid-template-columns: 40px 1fr 40px;
-    align-items: center;
-  
-    padding: 0 10px;
-  
-    background: rgba(255, 247, 234, 0.85);
-    backdrop-filter: blur(8px);
-  
-    border-bottom: 1.5px solid rgba(241, 115, 0, 0.40);
-  }
-  
-  .cookBack {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-  
-    display: grid;
-    place-items: center;
-  
-    background: rgba(255, 255, 255, 0.85);
-    border: 1.5px solid rgba(241, 115, 0, 0.55);
-  
-    font-size: 18px;
-    font-weight: 950;
-    color: var(--ink);
-  
-    box-shadow: 0 8px 18px rgba(241, 115, 0, 0.12);
-  }
-  
-  .cookTitle {
-    text-align: center;
-    font-weight: 950;
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .cookSpacer {
-    width: 36px;
-  }
-  
-  /* ===== Main ===== */
-  .cookMain {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-  }
-  
-  /* ===== Camera Stage ===== */
+
   .cameraStage {
-    position: relative;
-    flex: 1;
-  
-    border-radius: var(--r-lg);
-    overflow: hidden;
-  
-    background: var(--bg-cream);
-    border: 1.5px solid var(--orange);
-  
-    box-shadow:
-      0 16px 36px rgba(0, 50, 73, 0.10),
-      0 10px 24px rgba(241, 115, 0, 0.12);
+    border-radius: 24px;
   }
-  
-  /* soften camera look a touch */
-  .cameraVideo {
-    filter: contrast(0.98) saturate(0.98);
-  }
-  
-  /* ===== Instruction Overlay ===== */
-  .nowOverlay {
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-  
-    width: calc(100% - 20px);
-    max-width: 460px;
-  }
-  
-  /* ===== Talk Button Placement ===== */
-  .talkButtonWrap {
-    position: absolute;
-    bottom: calc(14px + env(safe-area-inset-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 12;
-  }
-  
-  /* ===== Debug Toggle ===== */
-  .debugToggle {
-    width: 36px;
-    height: 36px;
-    border-radius: 12px;
-    display: grid;
-    place-items: center;
-
-    background: rgba(255, 255, 255, 0.85);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-
-    font-size: 9px;
-    font-weight: 900;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    color: #666;
-    letter-spacing: -0.3px;
-
-    transition: background 120ms, border-color 120ms, color 120ms;
-  }
-
-  .debugToggle.active {
-    background: #1a1a1a;
-    border-color: #1a1a1a;
-    color: #0f0;
-  }
-
-  /* ===== Debug Panel ===== */
-  .debugPanel {
-    position: absolute;
-    bottom: 120px;
-    left: 10px;
-    right: 10px;
-    max-height: 45%;
-    z-index: 20;
-
-    overflow-y: auto;
-    overscroll-behavior: contain;
-
-    background: rgba(10, 10, 10, 0.88);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-
-    padding: 8px;
-
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 11px;
-    line-height: 1.5;
-    color: #ccc;
-
-    animation: debugSlideUp 0.2s ease-out;
-  }
-
-  @keyframes debugSlideUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .debugHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2px 4px 6px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 6px;
-    font-weight: 700;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #888;
-  }
-
-  .debugClear {
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 600;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #999;
-    border-radius: 6px;
-    padding: 2px 8px;
-    cursor: pointer;
-  }
-
-  .debugClear:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
-  }
-
-  .debugEmpty {
-    color: #555;
-    padding: 12px 4px;
-    text-align: center;
-    font-style: italic;
-  }
-
-  .debugEntry {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: flex-start;
-    padding: 4px;
-    border-radius: 6px;
-    margin-bottom: 2px;
-  }
-
-  .debugEntry:hover {
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  .debugTime {
-    color: #555;
-    flex-shrink: 0;
-  }
-
-  .debugType {
-    flex-shrink: 0;
-    font-weight: 700;
-    width: 20px;
-    text-align: center;
-  }
-
-  .debugEntry--tool-call .debugType   { color: #ffcc00; }
-  .debugEntry--snapshot .debugType    { color: #00ccff; }
-  .debugEntry--gemini-request .debugType  { color: #ff9900; }
-  .debugEntry--gemini-response .debugType { color: #00ff88; }
-  .debugEntry--error .debugType       { color: #ff4444; }
-
-  .debugMsg {
-    flex: 1;
-    min-width: 0;
-    word-break: break-word;
-  }
-
-  .debugEntry--gemini-response .debugMsg {
-    color: #00ff88;
-  }
-
-  .debugEntry--error .debugMsg {
-    color: #ff6666;
-  }
-
-  .debugThumb {
-    width: 100%;
-    max-width: 200px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 4px;
-  }
-
-  /* ===== Responsive polish ===== */
-  @media (min-width: 700px) {
-    .cookApp {
-      padding-top: 8px;
-    }
-  
-    .cameraStage {
-      border-radius: 26px;
-    }
-  }
-  
+}

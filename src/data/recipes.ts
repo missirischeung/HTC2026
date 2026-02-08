@@ -117,6 +117,36 @@ export type Step = {
     },
   
     {
+id: "easy-garden-salad",
+      title: "Easy Garden Salad",
+      description: "Stupid simple salad — just chop, toss, and eat.",
+      image:
+        "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1400&q=80",
+      steps: [
+        {
+          id: 1,
+          text: "Grab half a cucumber and slice it into rounds or half-moons.",
+          prompt: "Slice cucumber",
+        },
+        {
+          id: 2,
+          text: "Take about five mini tomatoes and cut each one in half.",
+          prompt: "Halve tomatoes",
+        },
+        {
+          id: 3,
+          text: "Tear up some lettuce leaves into bite-sized pieces.",
+          prompt: "Tear lettuce",
+        },
+        {
+          id: 4,
+          text: "Toss everything together into a paper bowl and you're done!",
+          prompt: "Toss in bowl",
+        },
+      ],
+    },
+
+    {
       id: "scrambled-eggs",
       title: "Soft Scrambled Eggs",
       description: "Creamy eggs made gently, perfect for breakfast.",
