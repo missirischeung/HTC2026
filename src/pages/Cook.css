@@ -1,0 +1,142 @@
+/* ===== Cooking App Palette ===== */
+.cookApp {
+    --bg-soft: #dbe4ee;        /* Alice Blue */
+    --ink: #003249;            /* Deep Space Blue */
+    --primary: #3185fc;        /* Azure Blue */
+    --card: rgba(255, 255, 255, 0.92);
+    --border: rgba(0, 50, 73, 0.12);
+  
+    min-height: 100dvh;
+    background: var(--bg-soft);
+    color: var(--ink);
+  
+    display: flex;
+    flex-direction: column;
+  
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  
+  /* ===== Top Bar ===== */
+  .cookTopbar {
+    height: 52px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+  
+    padding: 0 10px;
+  
+    background: rgba(219, 228, 238, 0.85);
+    backdrop-filter: blur(8px);
+  
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .cookBack {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  
+    display: grid;
+    place-items: center;
+  
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border);
+  
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--ink);
+  }
+  
+  .cookTitle {
+    text-align: center;
+    font-weight: 950;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .cookSpacer {
+    width: 36px;
+  }
+  
+  /* ===== Main ===== */
+  .cookMain {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+  }
+  
+  /* ===== Camera Stage ===== */
+  .cameraStage {
+    position: relative;
+    flex: 1;
+  
+    border-radius: 22px;
+    overflow: hidden;
+  
+    background: #cfd8e3; /* soft placeholder */
+    border: 1px solid var(--border);
+  
+    box-shadow:
+      0 16px 36px rgba(0, 50, 73, 0.12),
+      0 4px 10px rgba(0, 50, 73, 0.08);
+  }
+  
+  /* soften camera look */
+  .cameraVideo {
+    filter: contrast(0.96) saturate(0.95);
+  }
+  
+  /* ===== Instruction Overlay ===== */
+  .nowOverlay {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  
+    width: calc(100% - 20px);
+    max-width: 460px;
+  }
+  
+  /* ===== Talk Button Placement ===== */
+  .talkButtonWrap {
+    position: absolute;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 12;
+  }
+  
+  /* ===== Camera fallback (permission denied) ===== */
+  .cameraFallback {
+    position: absolute;
+    inset: 0;
+  
+    display: grid;
+    place-items: center;
+  
+    background: linear-gradient(
+      135deg,
+      #cfd8e3,
+      #dbe4ee
+    );
+  
+    color: rgba(0, 50, 73, 0.55);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  
+  /* ===== Responsive polish ===== */
+  @media (min-width: 700px) {
+    .cookApp {
+      padding-top: 8px;
+    }
+  
+    .cameraStage {
+      border-radius: 26px;
+    }
+  }
+  

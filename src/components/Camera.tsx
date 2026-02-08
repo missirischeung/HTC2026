@@ -30,7 +30,7 @@ export default function Camera() {
     } catch (e: unknown) {
       setStatus("error");
       if (e instanceof Error) setErrorMsg(e.message);
-      else setErrorMsg("Camera permission/device error.");
+      else setErrorMsg("Camera is off. Enable permission to use camera.");
     }
   }
 

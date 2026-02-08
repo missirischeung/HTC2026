@@ -1,75 +1,42 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./TalkButton.css";
 
-type SpeechRecognitionConstructor = new () => SpeechRecognition;
-
-// Add missing vendor-prefixed typing
-declare global {
-  interface Window {
-    webkitSpeechRecognition?: SpeechRecognitionConstructor;
-    SpeechRecognition?: SpeechRecognitionConstructor;
-  }
-}
+type Props = {
+  onToggleListening?: (isListening: boolean) => void;
+  autoStopMs?: number; // optional: automatically stop "listening" after X ms
+};
 
 export default function TalkButton({
-  onTranscript,
-}: {
-  onTranscript: (text: string) => void;
-}) {
-  const [listening, setListening] = useState(false);
-  const [lastHeard, setLastHeard] = useState("");
-  const recRef = useRef<SpeechRecognition | null>(null);
+  onToggleListening,
+  autoStopMs = 0,
+}: Props) {
+  const [isListening, setIsListening] = useState(false);
 
-  const supported = useMemo(
-    () => Boolean(window.SpeechRecognition || window.webkitSpeechRecognition),
-    []
-  );
+  // optional auto-stop (pure UI)
+  useEffect(() => {
+    if (!isListening) return;
+    if (!autoStopMs || autoStopMs <= 0) return;
 
-  function start() {
-    if (!supported) return;
+    const t = window.setTimeout(() => setIsListening(false), autoStopMs);
+    return () => window.clearTimeout(t);
+  }, [isListening, autoStopMs]);
 
-    const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!Rec) return;
-
-    // Stop any existing session cleanly
-    recRef.current?.stop();
-
-    const rec = new Rec();
-    recRef.current = rec;
-
-    rec.continuous = false;
-    rec.interimResults = true;
-    rec.lang = "en-US";
-
-    rec.onstart = () => setListening(true);
-    rec.onend = () => setListening(false);
-    rec.onerror = () => setListening(false);
-
-    rec.onresult = (event: SpeechRecognitionEvent) => {
-      const text = Array.from(event.results)
-        .map((r) => r[0]?.transcript ?? "")
-        .join("")
-        .trim();
-
-      setLastHeard(text);
-
-      const last = event.results[event.results.length - 1];
-      if (last.isFinal && text) onTranscript(text);
-    };
-
-    rec.start();
-  }
+  // notify parent if needed later
+  useEffect(() => {
+    onToggleListening?.(isListening);
+  }, [isListening, onToggleListening]);
 
   return (
     <div className="talkWrap">
-      {lastHeard && <div className="toast">Heard: “{lastHeard}”</div>}
-
       <button
-        className={`talkBtn ${listening ? "live" : ""}`}
-        onClick={start}
-        disabled={!supported}
+        type="button"
+        className={`talkBtn ${isListening ? "listening" : ""}`}
+        onClick={() => setIsListening((v) => !v)}
+        aria-pressed={isListening}
+        aria-label={isListening ? "Stop listening" : "Start listening"}
       >
-        {supported ? (listening ? "Listening…" : "Talk") : "Talk (unsupported)"}
+        <span className="talkIcon">{isListening ? "🎙️" : "🎤"}</span>
+        <span className="talkText">{isListening ? "Listening…" : "Talk"}</span>
       </button>
     </div>
   );
