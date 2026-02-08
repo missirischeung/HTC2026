@@ -14,6 +14,39 @@ export type Step = {
   
   export const RECIPES: Recipe[] = [
     {
+      "id": "minimalist-cucumber-salad",
+      "title": "Minimalist Cucumber Salad",
+      "description": "A crisp, refreshing salad focused entirely on the cucumber.",
+      "image": "/cucumber-salad.png",
+      "steps": [
+        {
+          "id": 1,
+          "text": "Get the cucumber.",
+          "prompt": "Get Cucumber"
+        },
+        {
+          "id": 2,
+          "text": "Lay the cucumber on a cutting board.",
+          "prompt": "Place on board"
+        },
+        {
+          "id": 3,
+          "text": "Cut the cucumber tips off and discard them.",
+          "prompt": "Trim ends"
+        },
+        {
+          "id": 4,
+          "text": "Slice the cucumber into thin rounds.",
+          "prompt": "Slice cucumber"
+        },
+        {
+          "id": 5,
+          "text": "Place the slices into a bowl and serve.",
+          "prompt": "Bowl and serve"
+        }
+      ]
+    },
+    {
       id: "simple-tomato-sauce",
       title: "Simple Tomato Sauce",
       description: "Cozy, classic, and fast. Perfect for pasta night.",
@@ -53,7 +86,7 @@ export type Step = {
       title: "Quick Veg Stir-Fry",
       description: "Crunchy veggies with a glossy sauce in under 15 minutes.",
       image:
-        "https://images.unsplash.com/photo-1604908554162-45f15b0d5b2e?auto=format&fit=crop&w=1400&q=80",
+        "/veg-stir-fry.png",
       steps: [
         {
           id: 1,
@@ -109,76 +142,6 @@ export type Step = {
           id: 4,
           text: "Remove from heat when softly set and still slightly glossy.",
           prompt: "Remove from heat",
-        },
-      ],
-    },
-  
-    {
-      id: "pan-seared-chicken",
-      title: "Pan-Seared Chicken",
-      description: "Juicy chicken with a golden crust.",
-      image:
-        "https://images.unsplash.com/photo-1604908177522-429a09a0b7f6?auto=format&fit=crop&w=1400&q=80",
-      steps: [
-        {
-          id: 1,
-          text: "Pat the chicken dry and season both sides with salt and pepper.",
-          prompt: "Season chicken",
-        },
-        {
-          id: 2,
-          text: "Heat oil in a pan over medium-high heat until shimmering.",
-          prompt: "Heat oil",
-        },
-        {
-          id: 3,
-          text: "Place chicken in the pan and cook without moving until a golden crust forms.",
-          prompt: "Sear chicken",
-        },
-        {
-          id: 4,
-          text: "Flip and cook the other side until fully cooked through.",
-          prompt: "Flip and finish",
-        },
-        {
-          id: 5,
-          text: "Let the chicken rest for a few minutes before serving.",
-          prompt: "Rest chicken",
-        },
-      ],
-    },
-  
-    {
-      id: "garlic-noodles",
-      title: "Garlic Noodles",
-      description: "Savory, buttery noodles with tons of garlic flavor.",
-      image:
-        "https://images.unsplash.com/photo-1617196037304-1f47bcb5fcbb?auto=format&fit=crop&w=1400&q=80",
-      steps: [
-        {
-          id: 1,
-          text: "Boil noodles in salted water until just tender.",
-          prompt: "Boil noodles",
-        },
-        {
-          id: 2,
-          text: "Mince garlic and prepare butter and seasonings.",
-          prompt: "Prep garlic",
-        },
-        {
-          id: 3,
-          text: "Melt butter in a pan and sauté garlic gently until fragrant.",
-          prompt: "Sauté garlic",
-        },
-        {
-          id: 4,
-          text: "Add drained noodles to the pan and toss to coat.",
-          prompt: "Add noodles",
-        },
-        {
-          id: 5,
-          text: "Season and serve immediately while hot.",
-          prompt: "Season and serve",
         },
       ],
     },
