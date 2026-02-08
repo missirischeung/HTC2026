@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# CookSmart — Voice-Guided Cooking Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A voice-guided cooking assistant that uses AI vision to analyze your camera feed and help you cook recipes step-by-step.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Recipe Selection** — Browse and preview recipes with step-by-step instructions
+- **Live Camera Feed** — Real-time camera integration (prefers rear camera) for visual analysis
+- **Voice Interaction** — Talk to the assistant using ElevenLabs voice agents
+- **AI Vision Feedback** — Gemini analyzes camera frames to assess your cooking progress and provide feedback
+- **Auto-Advance** — Automatically moves to the next step when AI confirms you've completed the current one
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + TypeScript
+- Vite
+- React Router
+- [ElevenLabs React SDK](https://www.npmjs.com/package/@elevenlabs/react) — voice agent
+- [Google GenAI SDK](https://www.npmjs.com/package/@google/genai) — Gemini vision analysis
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Install dependencies:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```bash
+   npm install
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+2. Create a `.env` file in the project root:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+   ```env
+   VITE_GEMINI_API_KEY=your_gemini_api_key
+   VITE_AGENT_ID=your_elevenlabs_agent_id
+   ```
+
+3. Start the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Grant camera and microphone permissions when prompted by the browser.
+
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Camera.tsx          # Camera feed with toggle
+│   ├── Instructions.tsx    # Step-by-step instruction pills
+│   └── TalkButton.tsx      # Voice button + Gemini integration
+├── pages/
+│   ├── RecipeSelect.tsx    # Recipe grid with preview modal
+│   └── Cook.tsx            # Main cooking view
+├── data/
+│   └── recipes.ts          # Recipe definitions
+├── App.tsx                 # Router config
+└── main.tsx                # Entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Available Recipes
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Minimalist Cucumber Salad
+2. Simple Tomato Sauce
+3. Quick Veg Stir-Fry
+4. Soft Scrambled Eggs
