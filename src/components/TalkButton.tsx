@@ -196,7 +196,7 @@ export default function TalkButton({
                 onPassStepRef.current();
               }
 
-              return feedback;
+              return `The user asked ${question}. You should respond with this feedback: ${feedback}`;
             } catch (err) {
               console.error("Gemini API error:", err);
               log?.({ time: now(), type: "error", message: `Gemini error: ${err}` });
