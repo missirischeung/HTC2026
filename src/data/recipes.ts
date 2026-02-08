@@ -17,7 +17,7 @@ export type Step = {
       "id": "minimalist-cucumber-salad",
       "title": "Minimalist Cucumber Salad",
       "description": "A crisp, refreshing salad focused entirely on the cucumber.",
-      "image": "https://images.unsplash.com/photo-1592417817098-8fd3d9ebc4a5?auto=format&fit=crop&w=1400&q=80",
+      "image": "/cucumber-salad.png",
       "steps": [
         {
           "id": 1,
@@ -86,7 +86,7 @@ export type Step = {
       title: "Quick Veg Stir-Fry",
       description: "Crunchy veggies with a glossy sauce in under 15 minutes.",
       image:
-        "https://images.unsplash.com/photo-1604908554162-45f15b0d5b2e?auto=format&fit=crop&w=1400&q=80",
+        "/veg-stir-fry.png",
       steps: [
         {
           id: 1,
@@ -142,76 +142,6 @@ export type Step = {
           id: 4,
           text: "Remove from heat when softly set and still slightly glossy.",
           prompt: "Remove from heat",
-        },
-      ],
-    },
-  
-    {
-      id: "pan-seared-chicken",
-      title: "Pan-Seared Chicken",
-      description: "Juicy chicken with a golden crust.",
-      image:
-        "https://images.unsplash.com/photo-1604908177522-429a09a0b7f6?auto=format&fit=crop&w=1400&q=80",
-      steps: [
-        {
-          id: 1,
-          text: "Pat the chicken dry and season both sides with salt and pepper.",
-          prompt: "Season chicken",
-        },
-        {
-          id: 2,
-          text: "Heat oil in a pan over medium-high heat until shimmering.",
-          prompt: "Heat oil",
-        },
-        {
-          id: 3,
-          text: "Place chicken in the pan and cook without moving until a golden crust forms.",
-          prompt: "Sear chicken",
-        },
-        {
-          id: 4,
-          text: "Flip and cook the other side until fully cooked through.",
-          prompt: "Flip and finish",
-        },
-        {
-          id: 5,
-          text: "Let the chicken rest for a few minutes before serving.",
-          prompt: "Rest chicken",
-        },
-      ],
-    },
-  
-    {
-      id: "garlic-noodles",
-      title: "Garlic Noodles",
-      description: "Savory, buttery noodles with tons of garlic flavor.",
-      image:
-        "https://images.unsplash.com/photo-1617196037304-1f47bcb5fcbb?auto=format&fit=crop&w=1400&q=80",
-      steps: [
-        {
-          id: 1,
-          text: "Boil noodles in salted water until just tender.",
-          prompt: "Boil noodles",
-        },
-        {
-          id: 2,
-          text: "Mince garlic and prepare butter and seasonings.",
-          prompt: "Prep garlic",
-        },
-        {
-          id: 3,
-          text: "Melt butter in a pan and sauté garlic gently until fragrant.",
-          prompt: "Sauté garlic",
-        },
-        {
-          id: 4,
-          text: "Add drained noodles to the pan and toss to coat.",
-          prompt: "Add noodles",
-        },
-        {
-          id: 5,
-          text: "Season and serve immediately while hot.",
-          prompt: "Season and serve",
         },
       ],
     },
