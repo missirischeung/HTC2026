@@ -3,8 +3,13 @@ import "./Camera.css";
 
 type CameraStatus = "idle" | "on" | "error";
 
-export default function Camera() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+interface CameraProps {
+  videoRef?: React.RefObject<HTMLVideoElement | null>;
+}
+
+export default function Camera({ videoRef: externalVideoRef }: CameraProps) {
+  const internalVideoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRef = externalVideoRef ?? internalVideoRef;
   const streamRef = useRef<MediaStream | null>(null);
 
   const [status, setStatus] = useState<CameraStatus>("idle");

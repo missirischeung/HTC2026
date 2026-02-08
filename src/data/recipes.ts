@@ -20,10 +20,15 @@ export type Step = {
       image:
         "https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1400&q=80",
       steps: [
+        // {
+        //   id: 1,
+        //   text: "Wash and prepare all ingredients, including tomatoes, onion, and garlic.",
+        //   prompt: "Prep ingredients",
+        // },
         {
           id: 1,
-          text: "Wash and prepare all ingredients, including tomatoes, onion, and garlic.",
-          prompt: "Prep ingredients",
+          text: "The only ingredient you need for this step is a cucumber.",
+          prompt: "Obtain cucumber",
         },
         {
           id: 2,
