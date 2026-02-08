@@ -51,28 +51,42 @@ export default function Camera() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const isOn = status === "on";
+
   return (
     <div className="cameraPanel">
       <div className="cameraFrame">
         <video ref={videoRef} className="cameraVideo" playsInline muted autoPlay />
+
         <div className="cameraOverlay">
           <div className="cameraBadge">AI Coach</div>
-          <div className="cameraHint">Keep the cutting board in frame</div>
         </div>
-      </div>
 
-      <div className="cameraControls">
-        {status !== "on" ? (
-          <button className="btn" onClick={() => void startCamera()}>
-            Start camera
-          </button>
-        ) : (
-          <button className="btn" onClick={stopCamera}>
-            Stop camera
-          </button>
+        {/* Bottom centered slider toggle */}
+        <div className="cameraToggleWrap" aria-label="Camera toggle">
+          <label className={`cameraSwitch ${isOn ? "on" : "off"}`}>
+            <input
+              type="checkbox"
+              checked={isOn}
+              onChange={(e) => {
+                const next = e.target.checked;
+                if (next) void startCamera();
+                else stopCamera();
+              }}
+              aria-label={isOn ? "Turn camera off" : "Turn camera on"}
+            />
+            <span className="cameraTrack" aria-hidden="true">
+              <span className="cameraThumb" />
+            </span>
+          </label>
+        </div>
+
+        {/* Error toast */}
+        {status === "error" && errorMsg && (
+          <div className="cameraToast" role="status" aria-live="polite">
+            {errorMsg}
+          </div>
         )}
-
-        {status === "error" && <div className="error">{errorMsg}</div>}
       </div>
     </div>
   );

@@ -1,13 +1,7 @@
-/* ===== Cooking App Palette ===== */
+/* ===== Cook Screen (Airy + Cream + Orange + Green Actions) ===== */
 .cookApp {
-    --bg-soft: #dbe4ee;        /* Alice Blue */
-    --ink: #003249;            /* Deep Space Blue */
-    --primary: #3185fc;        /* Azure Blue */
-    --card: rgba(255, 255, 255, 0.92);
-    --border: rgba(0, 50, 73, 0.12);
-  
     min-height: 100dvh;
-    background: var(--bg-soft);
+    background: var(--bg-sky);
     color: var(--ink);
   
     display: flex;
@@ -26,10 +20,10 @@
   
     padding: 0 10px;
   
-    background: rgba(219, 228, 238, 0.85);
+    background: rgba(255, 247, 234, 0.85);
     backdrop-filter: blur(8px);
   
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1.5px solid rgba(241, 115, 0, 0.40);
   }
   
   .cookBack {
@@ -40,12 +34,14 @@
     display: grid;
     place-items: center;
   
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(241, 115, 0, 0.55);
   
     font-size: 18px;
-    font-weight: 900;
+    font-weight: 950;
     color: var(--ink);
+  
+    box-shadow: 0 8px 18px rgba(241, 115, 0, 0.12);
   }
   
   .cookTitle {
@@ -73,20 +69,20 @@
     position: relative;
     flex: 1;
   
-    border-radius: 22px;
+    border-radius: var(--r-lg);
     overflow: hidden;
   
-    background: #cfd8e3; /* soft placeholder */
-    border: 1px solid var(--border);
+    background: var(--bg-cream);
+    border: 1.5px solid var(--orange);
   
     box-shadow:
-      0 16px 36px rgba(0, 50, 73, 0.12),
-      0 4px 10px rgba(0, 50, 73, 0.08);
+      0 16px 36px rgba(0, 50, 73, 0.10),
+      0 10px 24px rgba(241, 115, 0, 0.12);
   }
   
-  /* soften camera look */
+  /* soften camera look a touch */
   .cameraVideo {
-    filter: contrast(0.96) saturate(0.95);
+    filter: contrast(0.98) saturate(0.98);
   }
   
   /* ===== Instruction Overlay ===== */
@@ -108,25 +104,6 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 12;
-  }
-  
-  /* ===== Camera fallback (permission denied) ===== */
-  .cameraFallback {
-    position: absolute;
-    inset: 0;
-  
-    display: grid;
-    place-items: center;
-  
-    background: linear-gradient(
-      135deg,
-      #cfd8e3,
-      #dbe4ee
-    );
-  
-    color: rgba(0, 50, 73, 0.55);
-    font-size: 14px;
-    font-weight: 700;
   }
   
   /* ===== Responsive polish ===== */
