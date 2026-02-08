@@ -59,7 +59,7 @@ export default function Camera() {
         <video ref={videoRef} className="cameraVideo" playsInline muted autoPlay />
 
         <div className="cameraOverlay">
-          <div className="cameraBadge">AI Coach</div>
+          {/* <div className="cameraBadge">AI Coach</div> */}
         </div>
 
         {/* Bottom centered slider toggle */}
