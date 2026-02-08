@@ -14,6 +14,7 @@ export interface DebugEntry {
 interface TalkButtonProps {
   videoRef?: React.RefObject<HTMLVideoElement | null>;
   currentStep?: string;
+  nextStep?: string | null;
   onPassStep?: () => void;
   onDebugLog?: (entry: Omit<DebugEntry, "id">) => void;
 }
@@ -118,6 +119,7 @@ function now() {
 export default function TalkButton({
   videoRef,
   currentStep = "",
+  nextStep = null,
   onPassStep,
   onDebugLog,
 }: TalkButtonProps) {
@@ -129,6 +131,8 @@ export default function TalkButton({
   // Keep latest values in refs so the clientTools closure always sees current data
   const currentStepRef = useRef(currentStep);
   currentStepRef.current = currentStep;
+  const nextStepRef = useRef(nextStep);
+  nextStepRef.current = nextStep;
   const onPassStepRef = useRef(onPassStep);
   onPassStepRef.current = onPassStep;
   const videoRefRef = useRef(videoRef);
@@ -196,7 +200,7 @@ export default function TalkButton({
                 onPassStepRef.current();
               }
 
-              return `The user asked ${question}. You should respond with this feedback: ${feedback}`;
+              return `The user asked ${question}. You should respond with this feedback: ${feedback}. ${passed ? "The user passed the step." : "The user did not pass the step."}${passed ? (nextStepRef.current ? ` The next step is: ${nextStepRef.current}` : " That was the last step — the recipe is complete!") : ""}`;
             } catch (err) {
               console.error("Gemini API error:", err);
               log?.({ time: now(), type: "error", message: `Gemini error: ${err}` });

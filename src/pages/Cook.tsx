@@ -108,6 +108,7 @@ export default function Cook() {
             <TalkButton
               videoRef={videoRef}
               currentStep={steps[currentIndex]?.text ?? ""}
+              nextStep={steps[currentIndex + 1]?.text ?? null}
               onPassStep={goNext}
               onDebugLog={addDebugEntry}
             />

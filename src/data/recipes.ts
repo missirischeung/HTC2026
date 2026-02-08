@@ -14,21 +14,49 @@ export type Step = {
   
   export const RECIPES: Recipe[] = [
     {
+      "id": "minimalist-cucumber-salad",
+      "title": "Minimalist Cucumber Salad",
+      "description": "A crisp, refreshing salad focused entirely on the cucumber.",
+      "image": "https://images.unsplash.com/photo-1592417817098-8fd3d9ebc4a5?auto=format&fit=crop&w=1400&q=80",
+      "steps": [
+        {
+          "id": 1,
+          "text": "Get the cucumber.",
+          "prompt": "Get Cucumber"
+        },
+        {
+          "id": 2,
+          "text": "Lay the cucumber on a cutting board.",
+          "prompt": "Place on board"
+        },
+        {
+          "id": 3,
+          "text": "Cut the cucumber tips off and discard them.",
+          "prompt": "Trim ends"
+        },
+        {
+          "id": 4,
+          "text": "Slice the cucumber into thin rounds.",
+          "prompt": "Slice cucumber"
+        },
+        {
+          "id": 5,
+          "text": "Place the slices into a bowl and serve.",
+          "prompt": "Bowl and serve"
+        }
+      ]
+    },
+    {
       id: "simple-tomato-sauce",
       title: "Simple Tomato Sauce",
       description: "Cozy, classic, and fast. Perfect for pasta night.",
       image:
         "https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=1400&q=80",
       steps: [
-        // {
-        //   id: 1,
-        //   text: "Wash and prepare all ingredients, including tomatoes, onion, and garlic.",
-        //   prompt: "Prep ingredients",
-        // },
         {
           id: 1,
-          text: "The only ingredient you need for this step is a cucumber.",
-          prompt: "Obtain cucumber",
+          text: "Wash and prepare all ingredients, including tomatoes, onion, and garlic.",
+          prompt: "Prep ingredients",
         },
         {
           id: 2,
