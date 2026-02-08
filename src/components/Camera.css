@@ -1,169 +1,140 @@
+/* ===== Camera ===== */
 .cameraPanel {
-    background: rgba(255, 255, 255, 0.92);
-    border: 1.5px solid rgba(241, 115, 0, 0.55);
-    border-radius: 18px;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  
-    box-shadow: 0 12px 26px rgba(241, 115, 0, 0.10);
-  }
-  
-  .cameraFrame {
-    position: relative;
-    flex: 1;
-    background: #000;
-  }
-  
-  .cameraVideo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background: #000;
-  }
-  
-  .cameraOverlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 10px;
-  }
-  
-  .cameraBadge {
-    align-self: flex-start;
-    background: rgba(255, 247, 234, 0.82);
-    border: 1px solid rgba(241, 115, 0, 0.35);
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    color: rgba(0, 50, 73, 0.92);
-    font-weight: 950;
-  }
-  
-  /* ===== Bottom centered toggle wrap ===== */
-  .cameraToggleWrap {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    z-index: 25;
-  }
-  
-  /* Switch container (small pill) */
-  .cameraSwitch {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  
-    padding: 7px 9px;
-    border-radius: 999px;
-  
-    box-shadow: 0 10px 20px rgba(0, 50, 73, 0.12);
-    font-weight: 950;
-    transition: transform 120ms ease, filter 120ms ease;
-  }
-  
-  /* hide native checkbox */
-  .cameraSwitch input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* Track */
-  .cameraTrack {
-    width: 42px;
-    height: 24px;
-    border-radius: 999px;
-  
-    position: relative;
-    flex: 0 0 auto;
-  
-    border: 1px solid rgba(0, 50, 73, 0.10);
-    transition: background 160ms ease, border-color 160ms ease;
-  }
-  
-  /* Thumb */
-  .cameraThumb {
-    width: 18px;
-    height: 18px;
-    border-radius: 999px;
-  
-    position: absolute;
-    top: 50%;
-    left: 3px;
-    transform: translateY(-50%);
-  
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 6px 14px rgba(0, 50, 73, 0.18);
-  
-    transition: left 160ms ease, box-shadow 160ms ease;
-  }
-  
-  /* ===== OFF (red border + pale red fill) ===== */
-  .cameraSwitch.off {
-    border: 1.5px solid rgba(220, 53, 69, 0.80);
-    background: rgba(220, 53, 69, 0.18);
-  }
-  
-  .cameraSwitch.off .cameraTrack {
-    background: rgba(220, 53, 69, 0.28);
-    border-color: rgba(220, 53, 69, 0.35);
-  }
-  
-  .cameraSwitch.off .cameraThumb {
-    left: 3px;
-    box-shadow:
-      0 0 0 2px rgba(220, 53, 69, 0.22),
-      0 6px 14px rgba(0, 50, 73, 0.18);
-  }
-  
-  /* ===== ON (green border + pale green fill) ===== */
-  .cameraSwitch.on {
-    border: 1.5px solid rgba(47, 191, 113, 0.90);
-    background: rgba(47, 191, 113, 0.20);
-  }
-  
-  .cameraSwitch.on .cameraTrack {
-    background: rgba(47, 191, 113, 0.40);
-    border-color: rgba(47, 191, 113, 0.35);
-  }
-  
-  .cameraSwitch.on .cameraThumb {
-    left: 21px;
-    box-shadow:
-      0 0 0 2px rgba(47, 191, 113, 0.22),
-      0 6px 14px rgba(0, 50, 73, 0.18);
-  }
-  
-  /* Press feedback */
-  .cameraSwitch:active {
-    transform: translateY(1px);
-  }
-  
-  /* ===== Error Toast ===== */
-  .cameraToast {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: calc(56px + env(safe-area-inset-bottom)); /* sits above toggle */
-    z-index: 26;
-  
-    max-width: min(420px, calc(100% - 24px));
-    padding: 10px 12px;
-    border-radius: 14px;
-  
-    background: rgba(255, 255, 255, 0.92);
-    border: 1.5px solid rgba(241, 115, 0, 0.45);
-    color: rgba(0, 50, 73, 0.90);
-  
-    font-size: 12px;
-    font-weight: 850;
-  
-    box-shadow: 0 12px 26px rgba(0, 50, 73, 0.14);
-  }
-  
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cameraFrame {
+  position: relative;
+  flex: 1;
+  background: #111;
+}
+
+.cameraVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111;
+}
+
+.cameraOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Camera toggle — small, top-right so it doesn't overlap talk button */
+.cameraToggleWrap {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 25;
+}
+
+/* Switch (compact pill) */
+.cameraSwitch {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 6px;
+  border-radius: 999px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 100ms ease;
+}
+
+/* hide native checkbox */
+.cameraSwitch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Track */
+.cameraTrack {
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+
+  position: relative;
+  flex: 0 0 auto;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+/* Thumb */
+.cameraThumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  transition: left 160ms ease;
+}
+
+/* OFF */
+.cameraSwitch.off {
+  border: 1.5px solid rgba(220, 53, 69, 0.60);
+  background: rgba(220, 53, 69, 0.15);
+}
+
+.cameraSwitch.off .cameraTrack {
+  background: rgba(220, 53, 69, 0.25);
+  border-color: rgba(220, 53, 69, 0.30);
+}
+
+.cameraSwitch.off .cameraThumb {
+  left: 2px;
+}
+
+/* ON */
+.cameraSwitch.on {
+  border: 1.5px solid rgba(47, 191, 113, 0.70);
+  background: rgba(47, 191, 113, 0.18);
+}
+
+.cameraSwitch.on .cameraTrack {
+  background: rgba(47, 191, 113, 0.35);
+  border-color: rgba(47, 191, 113, 0.30);
+}
+
+.cameraSwitch.on .cameraThumb {
+  left: 18px;
+}
+
+.cameraSwitch:active {
+  transform: scale(0.95);
+}
+
+/* ===== Error Toast ===== */
+.cameraToast {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(48px + env(safe-area-inset-bottom));
+  z-index: 26;
+
+  max-width: min(380px, calc(100% - 24px));
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 53, 69, 0.25);
+  color: var(--ink);
+
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
